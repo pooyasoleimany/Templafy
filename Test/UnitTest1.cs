@@ -190,15 +190,10 @@ namespace Test
                 );
 
 
-            //lastNode);
+     
 
 
             var n = lastNode;
-            //while (n != null)
-            //{
-            //    Console.WriteLine(n.Data);
-            //    n = n.Previous();
-            //}
 
 
             n = lastNode;

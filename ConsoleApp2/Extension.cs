@@ -13,24 +13,14 @@ namespace ConsoleApp2
         public static Node Previous(this Node node)
         {
 
-            var parentCurrentNode = node.Parent;
-            if (CheckParentCurrentNodeIsNull(parentCurrentNode)) return null;
+            var parentNode = node.Parent;
+            if (CheckParentNodeIsNull(parentNode)) return null;
 
+            if (CheckThisNodeIsFirstChildOfParent(node, parentNode)) return parentNode;
 
-            if (CheckThisNodeIsFirstChildOfParent(node, parentCurrentNode)) return parentCurrentNode;
+            var previousSiblingNode = GetPreviousThisNode(node, parentNode);
+            return previousSiblingNode;
 
-
-            if (parentCurrentNode.Parent == null) // node in level 1
-            {
-                TraceLeftSideOfThisNode(node, parentCurrentNode);
-                return NodeStack.Pop();
-            }
-            else
-            {
-                var previousSiblingNode = GetPreviousSiblingThisNode(node, parentCurrentNode);
-                return previousSiblingNode;
-
-            }
         }
 
 
@@ -51,9 +41,9 @@ namespace ConsoleApp2
 
         }
 
-        private static bool CheckParentCurrentNodeIsNull(Node node)
+        private static bool CheckParentNodeIsNull(Node parent)
         {
-            if (node == null)
+            if (parent == null)
                 return true;
             else
                 return false;
@@ -64,37 +54,25 @@ namespace ConsoleApp2
             var firstChildParentNode = parent.Children.First();
             if (node == firstChildParentNode) // node is the first child
                 return true;
-
             else
                 return false;
 
         }
 
-        private static void TraceLeftSideOfThisNode(Node node, Node parentCurrentNode)
-        {
-            for (int i = 0; i <= parentCurrentNode.Children.Count(); i++)
-            {
-                if (parentCurrentNode.Children.ElementAt(i) == node)
-                {
-                    GetLastLeave(parentCurrentNode.Children.ElementAt(i - 1));
-                    break;
-                }
-            }
 
-        }
-
-        private static Node GetPreviousSiblingThisNode(Node node, Node parentCurrentNode)
+        private static Node GetPreviousThisNode(Node node, Node parent)
         {
-            for (int i = 0; i <= parentCurrentNode.Children.Count(); i++)
+            for (int i = 0; i <= parent.Children.Count(); i++)
             {
-                if (parentCurrentNode.Children.ElementAt(i) == node)
+            
+                if (parent.Children.ElementAt(i) == node)
                 {
-                    if(parentCurrentNode.Children.ElementAt(i - 1).Children.Count()==0)
-                    return parentCurrentNode.Children.ElementAt(i - 1);
+                    if(parent.Children.ElementAt(i - 1).Children.Count()==0)
+                    return parent.Children.ElementAt(i - 1);
 
                     else
                     {
-                        GetLastLeave(parentCurrentNode.Children.ElementAt(i - 1));
+                        GetLastLeave(parent.Children.ElementAt(i - 1));
                         return NodeStack.Pop();
                     }
 
