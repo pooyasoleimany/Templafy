@@ -23,6 +23,7 @@ The Node class looks like this:
 
 public class Node
 {
+
     private List<Node> _children;
 
     public Node(int data, params Node[] nodes)
