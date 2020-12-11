@@ -63,13 +63,11 @@ namespace ConsoleApp2
         {
             var firstChildParentNode = parent.Children.First();
             if (node == firstChildParentNode) // node is the first child
-            {
                 return true;
-            }
+
             else
-            {
                 return false;
-            }
+
         }
 
         private static void TraceLeftSideOfThisNode(Node node, Node parentCurrentNode)
@@ -91,7 +89,14 @@ namespace ConsoleApp2
             {
                 if (parentCurrentNode.Children.ElementAt(i) == node)
                 {
+                    if(parentCurrentNode.Children.ElementAt(i - 1).Children.Count()==0)
                     return parentCurrentNode.Children.ElementAt(i - 1);
+
+                    else
+                    {
+                        GetLastLeave(parentCurrentNode.Children.ElementAt(i - 1));
+                        return NodeStack.Pop();
+                    }
 
                 }
 
