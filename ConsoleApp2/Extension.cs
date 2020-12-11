@@ -18,7 +18,7 @@ namespace ConsoleApp2
 
 
             if (CheckThisNodeIsFirstChildOfParent(node, parentCurrentNode)) return parentCurrentNode;
- 
+
 
             if (parentCurrentNode.Parent == null) // node in level 1
             {
@@ -27,16 +27,16 @@ namespace ConsoleApp2
             }
             else
             {
-                var previousSiblingNode =GetPreviousSiblingThisNode(node, parentCurrentNode);
+                var previousSiblingNode = GetPreviousSiblingThisNode(node, parentCurrentNode);
                 return previousSiblingNode;
 
             }
         }
 
-  
+
         public static void GetLastLeave(Node node)
         {
-            if(node.Children.Count()==0)
+            if (node.Children.Count() == 0)
             {
                 NodeStack.Push(node);
             }
@@ -48,20 +48,18 @@ namespace ConsoleApp2
                     GetLastLeave(child); //<-- recursive
                 }
             }
-    
+
         }
 
         private static bool CheckParentCurrentNodeIsNull(Node node)
         {
             if (node == null)
-            {
                 return true;
-            }
             else
                 return false;
         }
 
-        private static bool CheckThisNodeIsFirstChildOfParent(Node node , Node parent )
+        private static bool CheckThisNodeIsFirstChildOfParent(Node node, Node parent)
         {
             var firstChildParentNode = parent.Children.First();
             if (node == firstChildParentNode) // node is the first child
@@ -74,7 +72,7 @@ namespace ConsoleApp2
             }
         }
 
-        private static void  TraceLeftSideOfThisNode(Node node, Node parentCurrentNode)
+        private static void TraceLeftSideOfThisNode(Node node, Node parentCurrentNode)
         {
             for (int i = 0; i <= parentCurrentNode.Children.Count(); i++)
             {
@@ -84,7 +82,7 @@ namespace ConsoleApp2
                     break;
                 }
             }
-       
+
         }
 
         private static Node GetPreviousSiblingThisNode(Node node, Node parentCurrentNode)
@@ -93,10 +91,10 @@ namespace ConsoleApp2
             {
                 if (parentCurrentNode.Children.ElementAt(i) == node)
                 {
-                   return  parentCurrentNode.Children.ElementAt(i - 1);
-               
+                    return parentCurrentNode.Children.ElementAt(i - 1);
+
                 }
-                
+
             }
             return null;
 
